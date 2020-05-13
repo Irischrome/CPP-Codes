@@ -1,0 +1,25 @@
+I am going to just write the function which takes a string as input(the number) and k digits to be removed such that the number
+is the smallest. When I first solved this problem, I thought the numbers must be consecutive which meade me find out that if you 
+compare integers as string, it still gives the correct result and obviously using strings you can compare much larger numbers than
+can be stored in int or long.
+
+#########
+
+string removeKDigits(string num, int k){
+  if(num.length()==k)
+    return "0";
+  }
+  
+  for(int i=0;i<k;i++){
+    int j=0;
+    while(j<num.length-1 && num[j]<=num[j+1]){
+      j++;
+    }
+    num.erase(j,1);
+  }
+  
+  while(num.length()>1 && num[0]=='0'){
+    num.erase(0,1);
+  }
+  return num;
+}
