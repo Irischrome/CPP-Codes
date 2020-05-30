@@ -1,0 +1,42 @@
+The reason I had to look up the answer is because I did not put the check condition and it was giving me segmentation fault because I was
+trying to access stack memory when it was empty. It was so irritating because I kept on dry-running the porgram with values but came up with
+nothing. I did see a answer with priority_queue but I didn't want to use that data structure. 
+The importance of checks!
+****************
+static int minEle = -1;
+int _stack :: getMin()
+{
+   if(s.empty())
+    return -1;
+   return minEle;
+}
+
+/*returns poped element from stack*/
+int _stack ::pop()
+{
+    if(s.empty())
+        return -1;
+   int c = s.top(); s.pop(); 
+   if(minEle==c){
+       int l=s.size();
+       minEle = INT_MAX; int a[l]; int i=0;
+       while(!s.empty())
+        {
+            minEle = minEle<s.top()? minEle: s.top();
+            a[i++] = s.top(); s.pop();}
+        for(int i=l-1;i>=0;i--){
+            s.push(a[i]);
+        }
+   }
+   return c;
+}
+
+/*push element x into the stack*/
+void _stack::push(int x)
+{
+   if(s.empty())
+    minEle =x;
+   else
+    minEle = (x<minEle)? x:minEle;
+   s.push(x);
+}
